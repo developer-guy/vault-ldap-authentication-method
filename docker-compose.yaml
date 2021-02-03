@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+  ldap_server:
+    image: osixia/openldap:1.4.0
+    command: ["--copy-service"]
+    environment:
+      LDAP_DOMAIN: developerguy.org
+      LDAP_ADMIN_PASSWORD: test1234
+      LDAP_BASE_DN: dc=developerguy,dc=org
+    ports:
+      - 389:389
+    volumes:
+      - "./ldif:/container/service/slapd/assets/config/bootstrap/ldif/custom"
+  ldap_server_admin:
+    image: osixia/phpldapadmin:0.9.0
+    ports:
+      - 8080:80
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: ldap_server
+      PHPLDAPADMIN_HTTPS: 'false'
+  vault:
+    container_name: vault-container
+    image: hashicorp/vault:1.5.4
+    ports:
+      - 8200:8200
+    environment:
+      - VAULT_ADDR=http://127.0.0.1:8200
+      - VAULT_API_ADDR=http://127.0.0.1:8201
+    command: server -dev -dev-root-token-id=root
+    cap_add:
+      - IPC_LOCK
+

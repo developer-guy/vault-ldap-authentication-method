@@ -1,0 +1,56 @@
+dn: cn=developer,dc=developerguy,dc=org
+cn: developer
+displayname: Developer User
+givenname: developer
+mail: developer@gmail.com
+objectclass: inetOrgPerson
+sn: Developer
+userpassword: developer_pass
+
+dn: cn=Developers,dc=developerguy,dc=org
+cn: Developers
+gidnumber: 500
+objectclass: posixGroup
+objectclass: top
+
+dn: cn=maintainer,dc=developerguy,dc=org
+cn: maintainer
+displayname: Maintainer User
+givenname: maintainer
+mail: maintainer@gmail.com
+objectclass: inetOrgPerson
+sn: Maintainer
+userpassword: maintainer_pass
+
+dn: ou=Groups,dc=developerguy,dc=org
+objectclass: organizationalUnit
+ou: Groups
+
+dn: cn=Admins,ou=Groups,dc=developerguy,dc=org
+cn: Admins
+objectclass: groupOfUniqueNames
+uniquemember: cn=admin,dc=developerguy,dc=org
+
+dn: cn=Maintainers,ou=Groups,dc=developerguy,dc=org
+cn: Maintainers
+objectclass: groupOfUniqueNames
+uniquemember: cn=maintainer,dc=developerguy,dc=org
+uniquemember: cn=developer,dc=developerguy,dc=org
+uniquemember: cn=Batuhan Apaydin,ou=Users,dc=developerguy,dc=org
+
+dn: ou=Users,dc=developerguy,dc=org
+objectclass: organizationalUnit
+ou: Users
+
+dn: cn=Batuhan Apaydin,ou=Users,dc=developerguy,dc=org
+cn: Batuhan Apaydin
+gidnumber: 500
+givenname: Batuhan
+homedirectory: /home/users/bapaydin
+objectclass: inetOrgPerson
+objectclass: posixAccount
+objectclass: top
+sn: Apaydin
+uid: bapaydin
+uidnumber: 1000
+userpassword: 12345
